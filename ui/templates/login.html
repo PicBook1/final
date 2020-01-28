@@ -1,0 +1,98 @@
+{{ define "login.layout" }}
+
+{{ template "navbar" . }}
+{{ template "login.content" . }}
+{{ template "footer" . }}
+
+{{ end }}
+
+{{ define "login.content" }}
+
+<body>
+	<h1>Register And Login </h1>
+	<div class="main">
+		<div class="w3">
+			<div class="signin-form profile">
+				<h3>Login</h3>
+
+				<div class="login-form">
+					<form action="#" method="post">
+						<input type="hidden" name="_csrf" value="{{ .CSRF }}" />
+						{{with .VErrors.Get "generic" }}
+						<div>
+							<label for="email">Email Address</label>
+							<input type="email" id="email" name="email" value='{{ .Values.Get "email" }}'
+								class="form-control" placeholder="Email address" required autofocus>
+						</div>
+						<div>
+							<label for="password">Password</label>
+							<input type="password" id="password" name="password" class="form-control"
+								placeholder="Password" required>
+						</div>
+					</form>
+				</div>
+				<div class="header-social wthree">
+					<p href="#" class="face">
+						<h5> </h5>
+					</p>
+					<p href="#" class="goog">
+						<h5> </h5>
+					</p>
+					<div class="clear"></div>
+				</div>
+				<p><a href="#"> Don't have an account?</a></p>
+			</div>
+		</div>
+		<div class="agile">
+			<div class="signin-form profile">
+				<h3>Register</h3>
+
+				<div class="login-form">
+					<form action="/signup" method="post">
+
+
+						<input type="hidden" name="_csrf" value="{{ .CSRF }}" />
+						<div>
+							<label for='email'>Email</label>
+							{{with .VErrors.Get "email"}}
+							<label class="text-danger">{{.}}</label>
+							{{end}}
+							<input type="text" name="email" placeholder="E-mail" id='email'
+								value='{{ .Values.Get "email" }}' required>
+						</div>
+						<div>
+							<label for='fullname'>Full Name</label>
+							{{with .VErrors.Get "fullname"}}
+							<label class="text-danger">{{.}}</label>
+							{{end}}
+							<input type="text" name="fullname" id='fullname' placeholder="FullName"
+								value='{{ .Values.Get "fullname" }}' required autofocus>
+
+						</div>
+						<div>
+							<label for='password'>Password</label>
+							{{with .VErrors.Get "password"}}
+							<label class="text-danger">{{.}}</label>
+							{{end}}
+							<input type="password" name="password" placeholder="Password" id='password' required>
+						</div>
+						<div>
+							<label for='confirmpassword'>Confirm Password</label>
+							{{with .VErrors.Get "confirmpassword"}}
+							<label class="text-danger">{{.}}</label>
+							{{end}}
+							<input type="password" name='confirmpassword' placeholder="Confirm Password"
+								id='confirmpassword' required>
+						</div>
+						<input type="submit" value="REGISTER">
+					</form>
+				</div>
+				<p><a href="#"> By clicking register, I agree to your terms</a></p>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+</body>
+
+{{ end }}
